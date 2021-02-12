@@ -10,14 +10,20 @@ public class CharacterMoveMent : BaseComponent
     [SerializeField]
     float jumpPower = 100.0f;
 
+    Animator animator;
+
     protected override void Init()
     {
         actorRigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     protected void CharacterMove(float horizontal, float vertical, float deltaTime)
     {
         actorRigidbody.velocity = new Vector3(horizontal * speed * deltaTime, actorRigidbody.velocity.y, vertical * speed * deltaTime);
+        float animatorSpeed = actorRigidbody.velocity.normalized.magnitude;
+
+        animator.SetFloat("Speed", animatorSpeed);
     }
 
     protected void Jump(float power)

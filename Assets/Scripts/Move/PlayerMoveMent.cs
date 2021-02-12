@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMoveMent : CharacterMoveMent
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,8 @@ public class PlayerMoveMent : CharacterMoveMent
         float vertical = Input.GetAxis("Vertical");
 
         base.CharacterMove(horizontal, vertical , Time.deltaTime);
+
+
 
         float jumpPower = Input.GetAxis("Jump");
         if (jumpPower > 0.0f)
