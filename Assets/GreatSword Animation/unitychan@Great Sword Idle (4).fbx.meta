@@ -6,6 +6,9 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: Great Sword Idle (4)
+  - first:
+      74: 1306109601541071418
+    second: Great Sword Idle
   externalObjects: {}
   materials:
     materialImportMode: 1
