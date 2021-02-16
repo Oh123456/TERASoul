@@ -26,10 +26,12 @@ public class TwoHandWeaponAttachment : MonoBehaviour
     private void OnAnimatorIK(int layerIndex)
     {
         //return ;
-        twoHandWeapon.position = ownerAnimator.GetIKHintPosition(AvatarIKHint.RightElbow);
+        //twoHandWeapon.position = ownerAnimator.GetIKHintPosition(AvatarIKHint.RightElbow);
+        twoHandWeapon.position = ownerAnimator.GetIKPosition(AvatarIKGoal.RightHand);
+        twoHandWeapon.rotation = ownerAnimator.GetIKRotation(AvatarIKGoal.RightHand);
 
-        ownerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand , 1.0f);
-        ownerAnimator.SetIKRotationWeight(AvatarIKGoal.LeftHand , 1.0f);
+        ownerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1.0f);
+        ownerAnimator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1.0f);
 
         ownerAnimator.SetIKPosition(AvatarIKGoal.LeftHand, l_Hand.position);
         ownerAnimator.SetIKRotation(AvatarIKGoal.LeftHand, l_Hand.rotation);

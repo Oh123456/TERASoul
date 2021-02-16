@@ -24,9 +24,15 @@ public class Character : BaseComponent
 
     protected bool isDeath = false;
 
+    [SerializeField]
+    Weapon defaultWeapon;
+ 
+    Weapon weapon { get; set; }
+
     private void Awake()
     {
-        this.Init();   
+        this.Init();
+        weapon = defaultWeapon;
     }
 
     protected override void Init()
@@ -43,4 +49,16 @@ public class Character : BaseComponent
         if (HP <= 0)
             isDeath = true;
     }
+
+
+    void Damage_ON()
+    {
+        weapon.Damage_ON();
+    }
+
+    void Damage_OFF()
+    {
+        weapon.Damage_OFF();
+    }
+
 }

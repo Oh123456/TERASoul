@@ -10,7 +10,13 @@ public class CharacterMoveMent : BaseComponent
     [SerializeField]
     float jumpPower = 100.0f;
 
-    Animator animator;
+    protected Animator animator;
+
+    private void Start()
+    {
+        actorRigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+    }
 
     protected override void Init()
     {
@@ -18,16 +24,21 @@ public class CharacterMoveMent : BaseComponent
         animator = GetComponent<Animator>();
     }
 
-    protected void CharacterMove(float horizontal, float vertical, float deltaTime)
+    public void CharacterMove(float horizontal, float vertical, float deltaTime)
     {
+        animator.SetBool("Jump", false);
         actorRigidbody.velocity = new Vector3(horizontal * speed * deltaTime, actorRigidbody.velocity.y, vertical * speed * deltaTime);
         float animatorSpeed = actorRigidbody.velocity.normalized.magnitude;
+        //Debug.Log(animatorSpeed);
 
-        animator.SetFloat("Speed", animatorSpeed);
+        animator.SetFloat("Vertical", vertical);
+        animator.SetFloat("Horizontal", horizontal);
     }
 
-    protected void Jump(float power)
+    public void Jump(float power)
     {
-        actorRigidbody.AddForce(new Vector3(0.0f, jumpPower * power, 0.0f));
+       
+       actorRigidbody.AddForce(new Vector3(0.0f, jumpPower * power, 0.0f));
+       animator.SetBool("Jump",true);
     }
 }
