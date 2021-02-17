@@ -18,6 +18,7 @@ public class UnityChanPlayer : Character
     // Update is called once per frame
     void Update()
     {
+        hp -= 1;
     }
 
     void L_Kick_ON()

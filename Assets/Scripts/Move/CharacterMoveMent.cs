@@ -29,7 +29,6 @@ public class CharacterMoveMent : BaseComponent
         animator.SetBool("Jump", false);
         actorRigidbody.velocity = new Vector3(horizontal * speed * deltaTime, actorRigidbody.velocity.y, vertical * speed * deltaTime);
         float animatorSpeed = actorRigidbody.velocity.normalized.magnitude;
-        //Debug.Log(animatorSpeed);
 
         animator.SetFloat("Vertical", vertical);
         animator.SetFloat("Horizontal", horizontal);

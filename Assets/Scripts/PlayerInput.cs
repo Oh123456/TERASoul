@@ -19,9 +19,10 @@ public class PlayerInput : MonoBehaviour
     {
         if (!isAttackInput)
         {
-            //Horizontal
+            animator.applyRootMotion = false;
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
+
 
             moveMent.CharacterMove(horizontal, vertical, Time.deltaTime);
 
@@ -30,6 +31,8 @@ public class PlayerInput : MonoBehaviour
                 moveMent.Jump(jumpPower);
 
         }
+        else
+            animator.applyRootMotion = true;
 
         if (Input.GetMouseButtonDown(0) & !isAttackInput)
         {

@@ -7,27 +7,55 @@ public class Character : BaseComponent
 {
     #region HP
     [SerializeField]
-    protected int MaxHP { get; set; }
+    protected int MaxHP;
     [SerializeField]
-    protected int HP { get; set; }
+    protected int HP;
     #endregion
 
     #region stamina
     [SerializeField]
-    protected int Maxstamina { get; set; }
+    protected int Maxstamina;
     [SerializeField]
-    protected int stamina { get; set; }
+    protected int Stamina;
     #endregion
 
     [SerializeField]
-    protected int damage;
-
+    protected int Damage;
+   
     protected bool isDeath = false;
 
     [SerializeField]
     Weapon defaultWeapon;
  
     Weapon weapon { get; set; }
+    #region getset
+    public int maxHP
+    {
+        get { return MaxHP; }
+        set { MaxHP = value; }
+    }
+    public int hp
+    {
+        get { return HP; }
+        set { HP = value; }
+    }
+    public int maxStamina
+    {
+        get { return Maxstamina; }
+        set { Maxstamina = value; }
+    }
+    public int stamina
+    {
+        get { return Stamina; }
+        set { Stamina = value; }
+    }
+    public int damage
+    {
+        get { return Damage; }
+        set { Damage = value; }
+    }
+    #endregion
+
 
     private void Awake()
     {
@@ -50,7 +78,6 @@ public class Character : BaseComponent
             isDeath = true;
     }
 
-
     void Damage_ON()
     {
         weapon.Damage_ON();
@@ -60,5 +87,6 @@ public class Character : BaseComponent
     {
         weapon.Damage_OFF();
     }
+
 
 }
