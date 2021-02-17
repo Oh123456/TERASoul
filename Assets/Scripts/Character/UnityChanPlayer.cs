@@ -9,6 +9,13 @@ public class UnityChanPlayer : Character
 
     [SerializeField]
     GameObject R_LEG;
+
+    [SerializeField]
+    int kickDamage;
+
+    [SerializeField]
+    int rightKickDamage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +25,6 @@ public class UnityChanPlayer : Character
     // Update is called once per frame
     void Update()
     {
-        hp -= 1;
     }
 
     void L_Kick_ON()

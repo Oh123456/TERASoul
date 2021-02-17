@@ -27,11 +27,26 @@ public class CharacterMoveMent : BaseComponent
     public void CharacterMove(float horizontal, float vertical, float deltaTime)
     {
         animator.SetBool("Jump", false);
-        actorRigidbody.velocity = new Vector3(horizontal * speed * deltaTime, actorRigidbody.velocity.y, vertical * speed * deltaTime);
+        Vector3 forward = transform.forward;
+        Vector3 velocity_X = transform.forward * speed * vertical * deltaTime;
+        Vector3 velocity_Z = Vector3.Cross(Vector3.up, forward) * speed * horizontal * deltaTime;
+        Vector3 velocity = velocity_X + velocity_Z;
+        velocity.y = actorRigidbody.velocity.y;
+        actorRigidbody.velocity = velocity;
+
+
         float animatorSpeed = actorRigidbody.velocity.normalized.magnitude;
 
         animator.SetFloat("Vertical", vertical);
         animator.SetFloat("Horizontal", horizontal);
+    }
+
+    public void CharacterMove(float horizontal, float vertical, float up, float deltaTime)
+    {
+        CharacterMove(horizontal, vertical,deltaTime);
+        Vector3 v3 = actorRigidbody.velocity;
+        v3.y = up * deltaTime;
+        actorRigidbody.velocity = v3;
     }
 
     public void Jump(float power)
@@ -39,5 +54,16 @@ public class CharacterMoveMent : BaseComponent
        
        actorRigidbody.AddForce(new Vector3(0.0f, jumpPower * power, 0.0f));
        animator.SetBool("Jump",true);
+    }
+
+    public void ChangeSpeed(float value)
+    {
+        speed = value;
+    }
+
+    public void ChangeSpeed(float value, ref float orine)
+    {
+        orine = speed;
+        speed = value;
     }
 }

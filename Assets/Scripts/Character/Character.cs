@@ -23,6 +23,7 @@ public class Character : BaseComponent
     protected int Damage;
    
     protected bool isDeath = false;
+    protected bool isBreaking = false;
 
     [SerializeField]
     Weapon defaultWeapon;
@@ -56,6 +57,36 @@ public class Character : BaseComponent
     }
     #endregion
 
+    public bool isBlocking
+    {
+        get
+        {
+            Animator animator = GetComponent<Animator>();
+            if (animator == null)
+                return false;
+            return animator.GetBool("Blocking");
+        }
+        set
+        {
+            isBlocking = value;
+        }
+    }
+
+
+    public bool isGuard
+    {
+        get
+        {
+            Animator animator = GetComponent<Animator>();
+            if (animator == null)
+                return false;
+            return animator.GetBool("Guard");
+        }
+        set
+        {
+            isGuard = value;
+        }
+    }
 
     private void Awake()
     {
@@ -78,6 +109,13 @@ public class Character : BaseComponent
             isDeath = true;
     }
 
+    public void TakeStaminaDamage(int damage)
+    {
+        stamina -= damage;
+        if (stamina <= 0)
+            isBreaking = true;
+    }
+
     void Damage_ON()
     {
         weapon.Damage_ON();
@@ -88,5 +126,16 @@ public class Character : BaseComponent
         weapon.Damage_OFF();
     }
 
+    public void Blocking()
+    {
+        Animator animator = GetComponent<Animator>();
+       animator.SetBool("Blocking", true);
+    }
+
+    void GuardEnd()
+    {
+        Animator animator = GetComponent<Animator>();
+        animator.SetBool("Blocking", false);
+    }
 
 }

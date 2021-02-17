@@ -22,12 +22,12 @@ public class TestInput : MonoBehaviour
         //moveMent.CharacterMove(horizontal, vertical, Time.deltaTime);
         //animator.SetInteger("AnimTest", 0);
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            animator.SetInteger("AnimTest",1);
+            animator.SetInteger("AttackKinds", 1);
         if (Input.GetKeyDown(KeyCode.Alpha2))
-            animator.SetInteger("AnimTest", 2);
+            animator.SetInteger("AttackKinds", 2);
         if (Input.GetKeyDown(KeyCode.Alpha3))
-            animator.SetInteger("AnimTest", 3);
+            animator.SetInteger("AttackKinds", 3);
         if (Input.GetKeyDown(KeyCode.Alpha4))
-            animator.SetInteger("AnimTest", 4);
+            animator.SetInteger("AttackKinds", 4);
     }
 }

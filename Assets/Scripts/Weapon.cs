@@ -28,8 +28,15 @@ public class Weapon : MonoBehaviour
     {
         if (other != owner & other != null)
         {
-            if (other.gameObject.tag == "Enemy")
-                other.gameObject.GetComponent<Character>().TakeDamage(owner.GetComponent<Character>().damage);
+            Character character = other.gameObject.GetComponent<Character>();
+            if (!character.isGuard)
+                character.TakeDamage(owner.GetComponent<Character>().damage);
+            else
+            {
+                character.TakeStaminaDamage((int)((float)(owner.GetComponent<Character>().damage) / 0.5f));
+                if (character.stamina >= 0)
+                    character.Blocking();
+            }
         }
     }
 }

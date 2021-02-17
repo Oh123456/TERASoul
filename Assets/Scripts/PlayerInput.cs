@@ -66,9 +66,14 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
             animator.SetBool("Guard", false);
 
-        animator.SetBool("Blocking", false);
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            animator.SetBool("Blocking", true);
+
+
+
+        float x = Input.GetAxis("Mouse X");
+        x += Input.GetAxis("KeyMouseMove");
+        transform.Rotate(0.0f, x, 0.0f);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0.0f);
+
     }
 
     void AttackEnd()
