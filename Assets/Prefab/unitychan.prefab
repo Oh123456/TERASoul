@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101928505}
-  m_LocalRotation: {x: -0.038573448, y: -1e-45, z: -0, w: 0.9992558}
-  m_LocalPosition: {x: 0, y: 1, z: -5.8199997}
+  m_LocalRotation: {x: -0.038573444, y: 1e-45, z: -0, w: 0.9992558}
+  m_LocalPosition: {x: 0, y: 1, z: -5.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 440190073}
@@ -2947,7 +2947,7 @@ GameObject:
   - component: {fileID: 6439167332492866159}
   m_Layer: 8
   m_Name: unitychan
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3058,8 +3058,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7dd140ebbc862a4794e86f7bb7edf35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 600
-  jumpPower: 600
+  speed: 400
+  jumpPower: 0
 --- !u!114 &6439167332492866159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3072,7 +3072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924c402758b3c82439e361ba7261d19a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 500
+  MaxHP: 3000
   HP: 0
   Maxstamina: 500
   Stamina: 0
@@ -3080,6 +3080,8 @@ MonoBehaviour:
   defaultWeapon: {fileID: 1289577116}
   L_LEG: {fileID: 1389686507}
   R_LEG: {fileID: 2007579328}
+  kickDamage: 0
+  rightKickDamage: 0
 --- !u!1 &3119331039444749108
 GameObject:
   m_ObjectHideFlags: 0

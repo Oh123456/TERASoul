@@ -22,11 +22,23 @@ public class FreeManAI : MonoBehaviour
     float attack3_dir = 8.0f;
 
     bool isMove;
-    bool attackRenge;
+    bool isattackRange;
     float originSpeed;
-
+    [SerializeField]
+    float attackRange = 3.0f;
+    [SerializeField]
+    List<float> attack_Frequency = new List<float>(4);
 
     AI_State aI_State;
+
+    private void Awake()
+    {
+        // 순서대로 공격확률 마지막은 1->2
+        attack_Frequency.Add(0.3f);
+        attack_Frequency.Add(0.3f);
+        attack_Frequency.Add(0.3f);
+        attack_Frequency.Add(0.5f);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +49,7 @@ public class FreeManAI : MonoBehaviour
         StartCoroutine(Coroutine_Thinking());
 
         isMove = false;
-        attackRenge = false;
+        isattackRange = false;
     }
 
     // Update is called once per frame
@@ -85,12 +97,13 @@ public class FreeManAI : MonoBehaviour
         Vector3 dir = (target.position - transform.position);
         float dist = dir.magnitude;
 
-        if (dist <= 3.0f)
+        if (dist <= attackRange)
         {
             aI_State = AI_State.Idle;
             animator.SetFloat("Vertical", 0.0f);
             animator.SetFloat("Horizontal", 0.0f);
-            attackRenge = true;
+            isattackRange = true;
+            characterMoveMent.CharacterMove(0.0f, 0.0f, Time.deltaTime);
             return;
         }
         characterMoveMent.CharacterMove(0.0f, 1.0f, Time.deltaTime);
@@ -107,6 +120,7 @@ public class FreeManAI : MonoBehaviour
         animator.SetBool("ComboAttack", false);
         animator.SetBool("Slash", false);
         animator.SetInteger("AttackKinds", 0);
+        animator.applyRootMotion = false;
     }
 
     void AttackEnd()
@@ -138,24 +152,42 @@ public class FreeManAI : MonoBehaviour
         while (true)
         {
             // n초뒤..  이코드 이후에 들어온다.
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.0f);
 
             float lenght = (target.position - transform.position).magnitude;
             if (lenght > attack3_dir)
             {
                 animator.SetBool("Attack", true);
-                animator.SetInteger("AttackKinds", 3);
+                animator.SetInteger("AttackKinds", 4);
 
             }
             else
             {
-                if (!attackRenge)
+                if (!isattackRange)
                     aI_State = AI_State.Trace;
                 else
                 {
-                    animator.SetBool("Attack", true);
-                    animator.SetInteger("AttackKinds", 1);
-                    attackRenge = false;
+                    if (!animator.GetBool("ComboAttack"))
+
+                    {
+                        for (int i = 0; i < attack_Frequency.Count - 1; i++)
+                        {
+                            if (Random.Range(0.0f, 1.0f) < attack_Frequency[i])
+                            {
+                                animator.SetBool("Attack", true);
+                                animator.SetInteger("AttackKinds", i + 1);
+                                animator.applyRootMotion = true;
+                                isattackRange = false;
+                                if (i == 0)
+                                {
+                                    if (Random.Range(0.0f, 1.0f) < attack_Frequency[attack_Frequency.Count - 1])
+                                        animator.SetBool("ComboAttack", true);
+                                }
+                                break;
+                            }
+                        }
+
+                    }
                 }
             }
         }

@@ -30,12 +30,16 @@ public class Weapon : MonoBehaviour
         {
             Character character = other.gameObject.GetComponent<Character>();
             if (!character.isGuard)
+            {
                 character.TakeDamage(owner.GetComponent<Character>().damage);
+                weaponCollider.enabled = false;
+            }
             else
             {
-                character.TakeStaminaDamage((int)((float)(owner.GetComponent<Character>().damage) / 0.5f));
+                character.TakeStaminaDamage((int)((float)(owner.GetComponent<Character>().damage) / 2));
                 if (character.stamina >= 0)
                     character.Blocking();
+                weaponCollider.enabled = false;
             }
         }
     }

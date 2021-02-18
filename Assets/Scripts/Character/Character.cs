@@ -57,6 +57,13 @@ public class Character : BaseComponent
     }
     #endregion
 
+    private void Update()
+    {
+        Stamina += (int)(Time.deltaTime * 100);
+        if (Stamina < Maxstamina)
+            Stamina = Maxstamina;
+    }
+
     public bool isBlocking
     {
         get
@@ -72,13 +79,13 @@ public class Character : BaseComponent
         }
     }
 
-
     public bool isGuard
     {
         get
         {
             Animator animator = GetComponent<Animator>();
-            if (animator == null)
+            
+            if (!animator.GetBool("Guard"))
                 return false;
             return animator.GetBool("Guard");
         }
@@ -138,4 +145,17 @@ public class Character : BaseComponent
         animator.SetBool("Blocking", false);
     }
 
+    public void SetDamage(int damage, ref int origin)
+    {
+        origin = this.damage;
+        this.damage = damage;
+    }
+
+    protected void WeaponeEnabled(bool value)
+    {
+        if (value)
+            weapon.Damage_ON();
+        else
+            weapon.Damage_OFF();
+    }
 }

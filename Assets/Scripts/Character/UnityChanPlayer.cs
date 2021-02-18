@@ -25,6 +25,12 @@ public class UnityChanPlayer : Character
     // Update is called once per frame
     void Update()
     {
+        Stamina += (int)(Time.deltaTime * 30);
+        if (Stamina > Maxstamina)
+            Stamina = Maxstamina;
+        HP += 1;
+        if (MaxHP < HP)
+            HP = MaxHP;
     }
 
     void L_Kick_ON()
