@@ -239,7 +239,7 @@ Transform:
   - {fileID: 39029815}
   - {fileID: 819356336}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &89953372
 PrefabInstance:
@@ -980,7 +980,7 @@ Transform:
   - {fileID: 136786891}
   - {fileID: 1753454620}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &226476795
 PrefabInstance:
@@ -5614,24 +5614,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1327623836, guid: 3bd33fdc854366643964162507fa4e9a, type: 3}
-      propertyPath: damages.Array.data[2]
-      value: 0
+      propertyPath: damages.Array.data[5]
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 1327623836, guid: 3bd33fdc854366643964162507fa4e9a, type: 3}
-      propertyPath: comboAttackDamas.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327623836, guid: 3bd33fdc854366643964162507fa4e9a, type: 3}
-      propertyPath: comboAttackDamas.Array.data[0]
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327623836, guid: 3bd33fdc854366643964162507fa4e9a, type: 3}
-      propertyPath: comboAttackDamas.Array.data[1]
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327623836, guid: 3bd33fdc854366643964162507fa4e9a, type: 3}
-      propertyPath: comboAttackDamas.Array.data[2]
-      value: 500
+      propertyPath: damages.Array.data[6]
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1327623842, guid: 3bd33fdc854366643964162507fa4e9a, type: 3}
       propertyPath: target

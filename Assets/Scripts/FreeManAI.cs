@@ -29,6 +29,7 @@ public class FreeManAI : MonoBehaviour
     [SerializeField]
     List<float> attack_Frequency = new List<float>(4);
 
+    float dist;
     AI_State aI_State;
 
     private void Awake()
@@ -37,6 +38,8 @@ public class FreeManAI : MonoBehaviour
         attack_Frequency.Add(0.3f);
         attack_Frequency.Add(0.3f);
         attack_Frequency.Add(0.3f);
+        attack_Frequency.Add(0.2f);
+        attack_Frequency.Add(0.4f);
         attack_Frequency.Add(0.5f);
     }
 
@@ -95,7 +98,7 @@ public class FreeManAI : MonoBehaviour
         if (isAttack)
             return;
         Vector3 dir = (target.position - transform.position);
-        float dist = dir.magnitude;
+        dist = dir.magnitude;
 
         if (dist <= attackRange)
         {
@@ -142,6 +145,11 @@ public class FreeManAI : MonoBehaviour
         characterMoveMent.ChangeSpeed(originSpeed);
     }
 
+    void Move_ON()
+    {
+        animator.applyRootMotion = true;
+    }
+
 
     #region Coroutine
     IEnumerator Coroutine_Thinking()
@@ -158,35 +166,45 @@ public class FreeManAI : MonoBehaviour
             if (lenght > attack3_dir)
             {
                 animator.SetBool("Attack", true);
-                animator.SetInteger("AttackKinds", 4);
+                animator.SetInteger("AttackKinds", 99);
 
             }
             else
             {
                 if (!isattackRange)
+                {
                     aI_State = AI_State.Trace;
+                   
+                }
                 else
                 {
                     if (!animator.GetBool("ComboAttack"))
-
                     {
-                        for (int i = 0; i < attack_Frequency.Count - 1; i++)
+                        if (target.gameObject.GetComponent<Character>().isGuard & (Random.Range(0.0f,1.0f) < 0.8f))
                         {
-                            if (Random.Range(0.0f, 1.0f) < attack_Frequency[i])
+                            animator.SetBool("Attack", true);
+                            animator.SetInteger("AttackKinds", 6);
+                            isattackRange = false;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < attack_Frequency.Count - 1; i++)
                             {
-                                animator.SetBool("Attack", true);
-                                animator.SetInteger("AttackKinds", i + 1);
-                                animator.applyRootMotion = true;
-                                isattackRange = false;
-                                if (i == 0)
+                                if (Random.Range(0.0f, 1.0f) < attack_Frequency[i])
                                 {
-                                    if (Random.Range(0.0f, 1.0f) < attack_Frequency[attack_Frequency.Count - 1])
-                                        animator.SetBool("ComboAttack", true);
+                                    animator.SetBool("Attack", true);
+                                    animator.SetInteger("AttackKinds", i + 1);
+                                    animator.applyRootMotion = true;
+                                    isattackRange = false;
+                                    if (i == 0 | i == 4)
+                                    {
+                                        if (Random.Range(0.0f, 1.0f) < attack_Frequency[attack_Frequency.Count - 1])
+                                            animator.SetBool("ComboAttack", true);
+                                    }
+                                    break;
                                 }
-                                break;
                             }
                         }
-
                     }
                 }
             }

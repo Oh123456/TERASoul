@@ -16,6 +16,11 @@ public class UnityChanPlayer : Character
     [SerializeField]
     int rightKickDamage;
 
+    private void Awake()
+    {
+        damageManager = new PlayerDamage();
+        base.Init();
+    }
     // Start is called before the first frame update
     void Start()
     {

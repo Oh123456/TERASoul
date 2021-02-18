@@ -57,6 +57,9 @@ public class Character : BaseComponent
     }
     #endregion
 
+    public DamageManager damageManager;
+
+
     private void Update()
     {
         Stamina += (int)(Time.deltaTime * 100);
@@ -98,8 +101,9 @@ public class Character : BaseComponent
     private void Awake()
     {
         this.Init();
-        weapon = defaultWeapon;
+
     }
+
 
     protected override void Init()
     {
@@ -107,6 +111,7 @@ public class Character : BaseComponent
         HP = MaxHP;
         stamina = Maxstamina;
         isDeath = false;
+        weapon = defaultWeapon;
     }
 
     public void TakeDamage(int damage)
@@ -158,4 +163,5 @@ public class Character : BaseComponent
         else
             weapon.Damage_OFF();
     }
+
 }

@@ -5,6 +5,9 @@ using UnityEngine;
 public class Kick : MonoBehaviour
 {
     Collider kickCollider;
+    [SerializeField]
+    GameObject owner;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,6 @@ public class Kick : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("킥");
+        gameObject.GetComponentInParent<Character>().damageManager.KickDamage(owner, other.gameObject);
     }
 }

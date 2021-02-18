@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64878575c9530d4897d36a95e8befbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 3119331039444749106}
 --- !u!1 &2007579328
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64878575c9530d4897d36a95e8befbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 3119331039444749106}
 --- !u!1 &3119331039444748800
 GameObject:
   m_ObjectHideFlags: 0
