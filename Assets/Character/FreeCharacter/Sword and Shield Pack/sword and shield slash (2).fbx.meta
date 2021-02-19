@@ -61,34 +61,55 @@ ModelImporter:
       events:
       - time: 0.21653378
         functionName: Damage_ON
-        data: 
+        data: UnderAttack
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.3323469
         functionName: Damage_ON
-        data: 
+        data: UpperAttack
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.69225556
         functionName: Damage_ON
-        data: 
+        data: JumpAttack
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.8245033
         functionName: Damage_OFF
-        data: 
+        data: JumpAttack
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.9668874
         functionName: AttackEnd
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.31229237
+        functionName: Damage_OFF
+        data: UnderAttack
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.49501663
+        functionName: Damage_OFF
+        data: UpperAttack
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.96013284
+        functionName: ComboAttackEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

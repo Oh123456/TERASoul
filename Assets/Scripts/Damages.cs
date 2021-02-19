@@ -4,13 +4,13 @@ using UnityEngine;
 
 public abstract class DamageManager 
 {
-    public abstract void KickDamage(GameObject strikObejct, GameObject hitObject);
+    public abstract bool KickDamage(GameObject strikObejct, GameObject hitObject);
 }
 
 
 public class EnemyDamage : DamageManager
 {
-    public override void KickDamage(GameObject strikObejct, GameObject hitObject)
+    public override bool KickDamage(GameObject strikObejct, GameObject hitObject)
     {
         if (hitObject.tag == "Player")
         {
@@ -19,22 +19,29 @@ public class EnemyDamage : DamageManager
             if (character.isGuard)
             {
                 character.TakeStaminaDamage(strikObejct.GetComponent<Character>().damage * 5);
+                if (character.stamina >= 0)
+                    character.Blocking();
             }
             else
                 character.TakeDamage(strikObejct.GetComponent<Character>().damage);
+
+            return true;
         }
+        return false;
     }
 }
 
 public class PlayerDamage : DamageManager
 {
-    public override void KickDamage(GameObject strikObejct, GameObject hitObject)
+    public override bool KickDamage(GameObject strikObejct, GameObject hitObject)
     {
         if (hitObject.tag == "Character")
         {
             // Next Add Code
             Character character = hitObject.gameObject.GetComponent<Character>();
             character.TakeDamage(strikObejct.GetComponent<Character>().damage);
+            return true;
         }
+        return false;
     }
 }

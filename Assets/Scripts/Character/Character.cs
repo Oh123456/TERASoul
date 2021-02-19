@@ -28,7 +28,7 @@ public class Character : BaseComponent
     [SerializeField]
     Weapon defaultWeapon;
  
-    Weapon weapon { get; set; }
+    public Weapon weapon { get; set; }
     #region getset
     public int maxHP
     {
@@ -58,7 +58,7 @@ public class Character : BaseComponent
     #endregion
 
     public DamageManager damageManager;
-
+    int hitDamage;
 
     private void Update()
     {
@@ -116,9 +116,13 @@ public class Character : BaseComponent
 
     public void TakeDamage(int damage)
     {
+        hitDamage = damage;
         HP -= damage;
         if (HP <= 0)
             isDeath = true;
+        GetComponent<Animator>().SetBool("Hit",true);
+        GetComponent<Animator>().SetFloat("damage", damage);
+
     }
 
     public void TakeStaminaDamage(int damage)
@@ -164,4 +168,34 @@ public class Character : BaseComponent
             weapon.Damage_OFF();
     }
 
+    void HitEnd()
+    {
+        GetComponent<Animator>().SetBool("Hit", false);
+        GetComponent<Animator>().speed = 1.0f;
+    }
+
+    void HIt_Slow()
+    {
+        float speed = 0.75f - (float)(hitDamage - 250) / 500;
+        if (speed <= 0.5f)
+            speed = 0.5f;
+        GetComponent<Animator>().speed = speed;
+        hitDamage = 0;
+        
+    }
+
+    void Reset()
+    {
+        this.State_Reset();
+    }
+
+    public virtual void State_Reset()
+    {
+        Animator animator = GetComponent<Animator>();
+        animator.SetBool("Attack",false);
+        animator.SetBool("ComboAttack", false);
+        animator.SetBool("Kick", false);
+        animator.SetBool("Hit", false);
+        animator.speed = 1.0f;
+    }
 }

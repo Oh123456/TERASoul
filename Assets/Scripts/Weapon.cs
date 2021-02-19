@@ -5,8 +5,8 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField]
-    GameObject owner;
-    Collider weaponCollider;
+    protected GameObject owner;
+    protected Collider weaponCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -14,19 +14,19 @@ public class Weapon : MonoBehaviour
         weaponCollider = GetComponent<Collider>();
     }
 
-    public void Damage_ON()
+    public virtual void Damage_ON()
     {
         weaponCollider.enabled = true;
     }
 
-    public void Damage_OFF()
+    public virtual void Damage_OFF()
     {
         weaponCollider.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other != owner & other != null)
+        if (other.gameObject != owner & other != null)
         {
             Character character = other.gameObject.GetComponent<Character>();
             if (!character.isGuard)
@@ -43,4 +43,6 @@ public class Weapon : MonoBehaviour
             }
         }
     }
+
+    
 }

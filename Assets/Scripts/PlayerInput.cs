@@ -6,7 +6,7 @@ public class PlayerInput : MonoBehaviour
 {
     Animator animator;
     CharacterMoveMent moveMent;
-    bool isAttackInput = false;
+    public bool isAttackInput = false;
     // Start is called before the first frame update
     void Start()
     {

@@ -16,6 +16,8 @@ public class Enemy : Character
     [SerializeField]
     GameObject R_LEG;
     int comboAttackCount = 0;
+  
+    EnemyWeapon eWeapon;
 
     private void Awake()
     {
@@ -26,7 +28,7 @@ public class Enemy : Character
     // Start is called before the first frame update
     void Start()
     {
-        
+        eWeapon = (EnemyWeapon)weapon;
     }
 
     // Update is called once per frame
@@ -47,18 +49,22 @@ public class Enemy : Character
         GetComponent<Rigidbody>().isKinematic = false;
     }
 
-    void Damage_ON()
+    void Damage_ON(string attack_tag)
     {
-        base.WeaponeEnabled(true);
 
+        //base.WeaponeEnabled(true);
+        eWeapon.WeaponColliderEnabled(attack_tag,true);
         Animator animator = GetComponent<Animator>();
         int attackKinds = animator.GetInteger("AttackKinds");
         if (attackKinds == 0)
             return;
         if (attackKinds != 3)
-            base.SetDamage(damages[attackKinds - 1], ref originDamage);
-        else if (attackKinds == 99)
-            base.SetDamage(damages[2], ref originDamage);
+        {
+           if (attackKinds == 99)
+                base.SetDamage(damages[2], ref originDamage);
+           else
+                base.SetDamage(damages[attackKinds - 1], ref originDamage);
+        }
         else
         {
             base.SetDamage(comboAttackDamas[comboAttackCount], ref originDamage);
@@ -66,11 +72,12 @@ public class Enemy : Character
         }
     }
 
-    void Damage_OFF()
+    void Damage_OFF(string attack_tag)
     {
-        base.WeaponeEnabled(false);
+        eWeapon.WeaponColliderEnabled(attack_tag, false);
+        //base.WeaponeEnabled(false);
         base.damage = originDamage;
-        comboAttackCount = 0;
+
     }
 
 
@@ -84,5 +91,10 @@ public class Enemy : Character
     {
         R_LEG.SetActive(false);
         base.damage = originDamage;
+    }
+
+    void ComboAttackEnd()
+    {
+        comboAttackCount = 0;
     }
 }

@@ -22,6 +22,12 @@ public class Kick : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        gameObject.GetComponentInParent<Character>().damageManager.KickDamage(owner, other.gameObject);
+        if (gameObject.GetComponentInParent<Character>().damageManager.KickDamage(owner, other.gameObject))
+            gameObject.SetActive(false);
+    }
+
+    public void SetEnable(bool value)
+    {
+        owner.SetActive(value);
     }
 }

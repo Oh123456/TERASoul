@@ -32,6 +32,9 @@ public class FreeManAI : MonoBehaviour
     float dist;
     AI_State aI_State;
 
+    [SerializeField]
+    Collider testcollider;
+
     private void Awake()
     {
         // 순서대로 공격확률 마지막은 1->2
@@ -58,6 +61,8 @@ public class FreeManAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            testcollider.enabled = !testcollider.enabled;
         AlwaysUpdate();
 
         switch (aI_State)
@@ -82,7 +87,7 @@ public class FreeManAI : MonoBehaviour
 
             Quaternion targetRotation = Quaternion.LookRotation(targetPosition - position, Vector3.up);
             //Debug.Log(targetRotation.eulerAngles);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 2.0f * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 6.0f * Time.deltaTime);
             transform.rotation = targetRotation;
 
 
@@ -148,8 +153,21 @@ public class FreeManAI : MonoBehaviour
     void Move_ON()
     {
         animator.applyRootMotion = true;
+        
     }
 
+    void Look()
+    {
+        Vector3 targetPosition = target.position;
+        Vector3 position = transform.position;
+        targetPosition.y = 0.0f;
+        position.y = 0.0f;
+
+        Quaternion targetRotation = Quaternion.LookRotation(targetPosition - position, Vector3.up);
+        //Debug.Log(targetRotation.eulerAngles);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 6.0f * Time.deltaTime);
+        transform.rotation = targetRotation;
+    }
 
     #region Coroutine
     IEnumerator Coroutine_Thinking()

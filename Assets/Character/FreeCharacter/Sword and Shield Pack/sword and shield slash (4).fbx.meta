@@ -68,14 +68,14 @@ ModelImporter:
         messageOptions: 0
       - time: 0.3178808
         functionName: Damage_ON
-        data: 
+        data: JumpAttack
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.7350994
         functionName: Damage_OFF
-        data: 
+        data: JumpAttack
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

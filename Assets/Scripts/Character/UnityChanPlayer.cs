@@ -30,12 +30,14 @@ public class UnityChanPlayer : Character
     // Update is called once per frame
     void Update()
     {
-        Stamina += (int)(Time.deltaTime * 30);
+        Stamina += (int)(Time.deltaTime * 100);
         if (Stamina > Maxstamina)
             Stamina = Maxstamina;
-        HP += 1;
-        if (MaxHP < HP)
-            HP = MaxHP;
+        if (Stamina < -50)
+            Stamina = -50;
+        //HP += 1;
+        //if (MaxHP < HP)
+        //    HP = MaxHP;
     }
 
     void L_Kick_ON()
@@ -57,5 +59,15 @@ public class UnityChanPlayer : Character
     void R_Kick_OFF()
     {
         R_LEG.SetActive(false);
+    }
+
+    //        
+    public override void State_Reset()
+    {
+        base.State_Reset();
+        Animator animator = GetComponent<Animator>();
+        animator.SetBool("H_Kick", false);
+
+        GetComponent<PlayerInput>().isAttackInput = false;
     }
 }

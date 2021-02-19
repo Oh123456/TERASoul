@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Character
   - Enemy
+  - UpperAttack
+  - UnderAttack
+  - JumpAttack
+  - MoveAttack
   layers:
   - Default
   - TransparentFX
