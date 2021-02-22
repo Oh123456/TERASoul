@@ -170,6 +170,7 @@ public class Character : BaseComponent
 
     void HitEnd()
     {
+        Debug.Log("HitEnd");
         GetComponent<Animator>().SetBool("Hit", false);
         GetComponent<Animator>().speed = 1.0f;
     }
