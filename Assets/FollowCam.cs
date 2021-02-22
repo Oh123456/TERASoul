@@ -5,79 +5,51 @@ using Cinemachine;
 
 public class FollowCam : MonoBehaviour
 {
-
-    Cinemachine.CinemachineVirtualCamera virtualCamera;
-
-    bool hit = false;
-    bool offestReset = true;
+    GameObject MainCamera;
+    CinemachineVirtualCamera virtualCamera;
     CinemachineTransposer transposer;
-    float distance;
-    float newoffset;
+    RaycastHit hit;
+    float Zoffset;
+    float newZoffset;
     // Start is called before the first frame update
     void Start()
     {
-        virtualCamera = GetComponent<Cinemachine.CinemachineVirtualCamera>();
+        virtualCamera = GetComponent<CinemachineVirtualCamera>();
         transposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
-        distance = transposer.m_FollowOffset.z;
-        newoffset = distance;
+        Zoffset = transposer.m_FollowOffset.z;
+        newZoffset = Zoffset;
+        MainCamera = GameObject.FindWithTag("MainCamera");
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Vector3 offset = transposer.m_FollowOffset;
-        //offset.z += 0.1f;
-        //if (offset.z >= newoffset)
-        //    offset.z = newoffset;
-        //transposer.m_FollowOffset = offset;
-        if (!hit)
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
-            Vector3 offset = transposer.m_FollowOffset;
-            offset.z -= 0.1f;
-            if (offset.z <= distance)
-                offset.z = distance;
-            transposer.m_FollowOffset = offset;
+            if (!(hit.collider.gameObject.tag == "Player"))
+            {
+                virtualCamera.transform.position = hit.point;
+                
+                
+                //Vector3 offset = transposer.m_FollowOffset;
+                //offset.z += 0.1f;
+                //transposer.m_FollowOffset = offset;
+                //newZoffset = offset.z;
+                //MainCamera.transform.position = hit.point;
+
+            }
+            else
+            {
+
+                //Vector3 offset = transposer.m_FollowOffset;
+                //offset.z -= 0.1f;
+                //if (offset.z <= Zoffset)
+                //    offset.z = Zoffset;
+                //transposer.m_FollowOffset = offset;
+            }
         }
 
-        if (transposer.m_FollowOffset.z >= -2.0f)
-        {
-            Vector3 offset = transposer.m_FollowOffset;
-            offset.z = -2.0f;
-            transposer.m_FollowOffset = offset;
-        }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        hit = true;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-       
-        Vector3 offset = transposer.m_FollowOffset;
-        offset.z += 0.1f;
-        if (offset.z >= -2.0f)
-            offset.z = -2.0f;
-        transposer.m_FollowOffset = offset;
-      
-
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-
-        hit = false;
-
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Vector3 offset = transposer.m_FollowOffset;
-        offset.z += 0.1f;
-        if (offset.z >= -2.0f)
-            offset.z = -2.0f;
-        transposer.m_FollowOffset = offset;
-   
-    }
 }
