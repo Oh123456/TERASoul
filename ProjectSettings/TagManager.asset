@@ -10,6 +10,10 @@ TagManager:
   - UnderAttack
   - JumpAttack
   - MoveAttack
+  - HUD
+  - DamageText
+  - HPBar
+  - Test
   layers:
   - Default
   - TransparentFX

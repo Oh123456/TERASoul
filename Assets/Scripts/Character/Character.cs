@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 
 public class Character : BaseComponent
@@ -21,9 +23,11 @@ public class Character : BaseComponent
 
     [SerializeField]
     protected int Damage;
-   
+
     protected bool isDeath = false;
     protected bool isBreaking = false;
+
+    public int takeDamage { set; get; }
 
     [SerializeField]
     Weapon defaultWeapon;
@@ -66,6 +70,8 @@ public class Character : BaseComponent
         if (Stamina < Maxstamina)
             Stamina = Maxstamina;
     }
+
+    public bool isMoveLock = false;
 
     public bool isBlocking
     {
@@ -114,14 +120,20 @@ public class Character : BaseComponent
         weapon = defaultWeapon;
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         hitDamage = damage;
         HP -= damage;
         if (HP <= 0)
+        {
+            GetComponent<Animator>().SetBool("Die", true);
             isDeath = true;
+            Invoke("ReGame", 10.0f);
+        }
         GetComponent<Animator>().SetBool("Hit",true);
         GetComponent<Animator>().SetFloat("damage", damage);
+
+        takeDamage = damage;
 
     }
 
@@ -129,7 +141,13 @@ public class Character : BaseComponent
     {
         stamina -= damage;
         if (stamina <= 0)
+        {
+            Vector3 vector3 = gameObject.transform.position;
+            vector3.y += 1.0f;
+            EffectManager.instance.SpawnEffect("BreakingEffect", vector3, gameObject.transform.rotation, gameObject);
+            GetComponent<Animator>().SetBool("Breaking", true);
             isBreaking = true;
+        }
     }
 
     void Damage_ON()
@@ -170,9 +188,11 @@ public class Character : BaseComponent
 
     void HitEnd()
     {
-        Debug.Log("HitEnd");
+        
         GetComponent<Animator>().SetBool("Hit", false);
+        GetComponent<Animator>().SetBool("Mirror", false);
         GetComponent<Animator>().speed = 1.0f;
+        isMoveLock = false;
     }
 
     void HIt_Slow()
@@ -187,16 +207,48 @@ public class Character : BaseComponent
 
     void Reset()
     {
+        Debug.Log("HitEnd");
         this.State_Reset();
+        isMoveLock = true;
+        GetComponent<Animator>().speed = 1.0f;
+    }
+
+
+
+    void MoveLock()
+    {
+        
+    }
+
+    void Slow(float slow)
+    {
+        GetComponent<Animator>().speed = slow;
+    }
+
+    void Slow_End()
+    {
+        GetComponent<Animator>().speed = 1.0f;
+    }
+
+    protected virtual void Breaking_End()
+    {
+        isMoveLock = false;
+        GetComponent<Animator>().SetBool("Breaking", false);
     }
 
     public virtual void State_Reset()
     {
         Animator animator = GetComponent<Animator>();
         animator.SetBool("Attack",false);
+        animator.SetBool("Guard", false);
         animator.SetBool("ComboAttack", false);
         animator.SetBool("Kick", false);
         animator.SetBool("Hit", false);
         animator.speed = 1.0f;
+    }
+
+    void ReGame()
+    {
+       SceneManager.LoadScene("Main");
     }
 }

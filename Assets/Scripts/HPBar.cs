@@ -13,7 +13,9 @@ public class HPBar : MonoBehaviour
 
     float maxHP;
     float hp; 
- 
+
+    float PreviousHp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class HPBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         hp = character.hp;
         float value = hp / maxHP;
         HPbar.value = value;
@@ -35,4 +38,6 @@ public class HPBar : MonoBehaviour
     }
 
     public void SetTarget(Character character) { this.character = character; }
+
+
 }

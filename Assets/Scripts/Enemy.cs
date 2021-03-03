@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : Character
 {
@@ -19,6 +20,12 @@ public class Enemy : Character
   
     EnemyWeapon eWeapon;
 
+    [SerializeField]
+    GameObject ray;
+
+    RaycastHit hit;
+
+
     private void Awake()
     {
         damageManager = (new EnemyDamage());
@@ -34,7 +41,8 @@ public class Enemy : Character
     // Update is called once per frame
     void Update()
     {
-
+        
+        Debug.DrawRay(ray.transform.position, -eWeapon.transform.right /*Vector3.Cross(ray.transform.position , eWeapon.transform.position )*/,  Color.green);
     }
 
 
@@ -97,4 +105,38 @@ public class Enemy : Character
     {
         comboAttackCount = 0;
     }
+
+    void ShockWave()
+    {
+        if (Physics.Raycast(ray.transform.position, -eWeapon.transform.right, out hit, 1.5f))
+        {
+            EffectManager.instance.SpawnEffect("ShockWave", hit.point , new Quaternion(0,0,0,0));
+            
+        }
+
+    }
+
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        GameObject[] finds = GameObject.FindGameObjectsWithTag("HPBar");
+        UIDamage uiDamage = null;
+        foreach (var gameObject in finds)
+        {
+            if (gameObject.GetComponent<UIDamage>() != null)
+            {
+                uiDamage = gameObject.GetComponent<UIDamage>();
+                break;
+            }
+
+        }
+        if (uiDamage)
+            uiDamage.ShowDamageText(damage);
+
+        if (isDeath)
+            GetComponent<FreeManAI>().enabled = false;
+    }
+
+
 }

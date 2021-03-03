@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Body_01
-  m_Shader: {fileID: 23, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: a9a8211f737bfbd4fb8a469399c59177, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -27,15 +27,53 @@ Material:
         m_Texture: {fileID: 8900000, guid: 526f476039ebee544874f76e9bc8b3ce, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _HeightMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: c4772712b065971448eb46d50d6e9a7b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _Amplitude: 1
+    - _Cull: 2
+    - _Cutoff: 0.25
+    - _EdgeWidth: 0.05
+    - _FresnelPower: 3
+    - _Glossiness: 0.6
+    - _Metallic: 0.2
+    - _NormalStrength1: 0.17
+    - _NormalStrength2: 0.8
+    - _OutlineWidth: 0.05
     - _Shininess: 0.18036382
+    - _Smoothness: 0.5
+    - _Speed: 0.25
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FlowDirection: {r: 1, g: 0, b: 0, a: 0}
+    - _FlowDirection1: {r: 0.05, g: 0, b: 0, a: 1}
+    - _FlowDirection2: {r: 0, g: 0.05, b: 0, a: 1}
+    - _OutlineColor: {r: 1, g: 0.19115877, b: 0, a: 1}
     - _ReflectColor: {r: 0.4957117, g: 0.49880204, b: 0.51492536, a: 0.21568628}
+    - _ScrollDirection: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.39095566, g: 0.48874, b: 0.8731343, a: 1}
 --- !u!1002 &2100001
 EditorExtensionImpl:

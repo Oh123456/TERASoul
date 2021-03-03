@@ -70,4 +70,53 @@ public class UnityChanPlayer : Character
 
         GetComponent<PlayerInput>().isAttackInput = false;
     }
+
+    void Die()
+    {
+        GetComponent<PlayerInput>().enabled = false;
+    }
+
+    void Lock()
+    {
+        base.State_Reset();
+        GetComponent<PlayerInput>().isLock = true;
+        GetComponent<Animator>().speed = 1.0f;
+    }
+
+    protected override void Breaking_End()
+    {
+        base.Breaking_End();
+        GetComponent<PlayerInput>().isLock = false ;
+    }
+
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        GameObject _UI =  GameObject.FindWithTag("HUD");
+        HitImage hitImage = _UI.GetComponent<HitImage>();
+        hitImage.OnHitSrceen();
+ 
+
+    }
+
+    void SuperArmor()
+    {
+
+    }
 }
+
+
+
+// 공통적인 질문 
+/* 
+ * //인성 면접//
+ * 자소서 잘읽어두자 스토리 말하기
+ * 모르는건 모른다고 말해두자 면접관이 당황스럽게 만들게 하는 질문들이다
+ * 본인 기술문서 잘 읽어두자
+ * 언어 선호도 C/C++ C#
+ * 넓이 우선 탐색
+ * 
+ * 가상함수 소멸자에 버추얼 
+ * 
+ */

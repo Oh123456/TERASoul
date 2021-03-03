@@ -7,17 +7,22 @@ public class PlayerInput : MonoBehaviour
     Animator animator;
     CharacterMoveMent moveMent;
     public bool isAttackInput = false;
+    public bool isLock = false;
+    int originDamage = 100;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         moveMent = GetComponent<CharacterMoveMent>();
+        originDamage = GetComponent<Character>().damage;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isAttackInput)
+        if (isLock)
+            return;
+        if ((!isAttackInput) & !(GetComponent<Character>().isMoveLock))
         {
             animator.applyRootMotion = false;
             float horizontal = Input.GetAxis("Horizontal");
@@ -42,17 +47,28 @@ public class PlayerInput : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(0) & 
             !animator.GetCurrentAnimatorStateInfo(0).IsName("Great Sword Slash_LastAttack") &
-            !animator.GetBool("Guard"))
+            !animator.GetBool("Guard") & 
+            !animator.GetBool("SkillAttack"))
         {
             animator.SetBool("ComboAttack", true);
             moveMent.CharacterMove(0, 0, Time.deltaTime);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1) & !isAttackInput)
+        {
+            animator.SetBool("SkillAttack", true);
+            isAttackInput = true;
+            moveMent.CharacterMove(0, 0, Time.deltaTime);
+            originDamage = GetComponent<Character>().damage;
+            GetComponent<Character>().damage = (int)(GetComponent<Character>().damage * 1.5f); 
+        }
 
-        if (Input.GetKeyDown(KeyCode.F) & !isAttackInput)
+         if (Input.GetKeyDown(KeyCode.F) & !isAttackInput)
         {
             animator.SetBool("Kick", true);
             isAttackInput = true;
             moveMent.CharacterMove(0, 0, Time.deltaTime);
+            originDamage = GetComponent<Character>().damage;
+            GetComponent<Character>().damage = (int)(GetComponent<Character>().damage * 0.5f);
         }
 
         if (Input.GetKeyDown(KeyCode.G) & !isAttackInput)
@@ -60,6 +76,8 @@ public class PlayerInput : MonoBehaviour
             animator.SetBool("H_Kick", true);
             isAttackInput = true;
             moveMent.CharacterMove(0, 0, Time.deltaTime);
+            originDamage = GetComponent<Character>().damage;
+            GetComponent<Character>().damage = (int)(GetComponent<Character>().damage * 0.75f);
         }
         if (Input.GetMouseButtonDown(1))
             animator.SetBool("Guard", true);
@@ -74,6 +92,10 @@ public class PlayerInput : MonoBehaviour
         transform.Rotate(0.0f, x, 0.0f);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0.0f);
 
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+            EffectManager.instance.SpawnEffect("ShockWave", new Vector3(0,0,0), new Quaternion(0,0,0,0));
+
     }
 
     void AttackEnd()
@@ -84,6 +106,9 @@ public class PlayerInput : MonoBehaviour
             isAttackInput = false;
         }
         animator.SetBool("ComboAttack", false);
+        animator.SetBool("SkillAttack", false);
+
+        GetComponent<Character>().damage = originDamage;
     }
 
     void KickEnd()
@@ -91,6 +116,10 @@ public class PlayerInput : MonoBehaviour
         animator.SetBool("Kick", false);
         animator.SetBool("H_Kick", false);
         isAttackInput = false;
+        GetComponent<Character>().damage = originDamage;
     }
 
+
+
+    
 }

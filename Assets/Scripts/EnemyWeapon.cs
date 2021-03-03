@@ -52,23 +52,19 @@ public class EnemyWeapon : Weapon
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
+      
         if (other.gameObject != owner & other != null)
         {
+            base.OnTriggerEnter(other);
             Character character = other.gameObject.GetComponent<Character>();
             if (!character.isGuard)
             {
-                character.TakeDamage(owner.GetComponent<Character>().damage);
-                weaponCollider.enabled = false;
                 WeaponColliderEnabled_ALL();
             }
             else
             {
-                character.TakeStaminaDamage((int)((float)(owner.GetComponent<Character>().damage) / 2));
-                if (character.stamina >= 0)
-                    character.Blocking();
-                weaponCollider.enabled = false;
                 WeaponColliderEnabled_ALL();
             }
         }
