@@ -36,8 +36,8 @@ public class FollowCam : MonoBehaviour
 
 
         //Vector3 doffset = transposer.m_FollowOffset;
-        Debug.DrawRay(MainCamera.transform.position, MainCamera.transform.forward * 5.8f, Color.blue);
-        Debug.DrawRay(MainCamera.transform.position, -1 * MainCamera.transform.forward * 0.10f, Color.blue);
+        //Debug.DrawRay(MainCamera.transform.position, MainCamera.transform.forward * 5.8f, Color.blue);
+        //Debug.DrawRay(MainCamera.transform.position, -1 * MainCamera.transform.forward * 0.10f, Color.blue);
 
 
         if (Physics.Raycast(MainCamera.transform.position, MainCamera.transform.forward, out hit))

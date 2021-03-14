@@ -73,7 +73,7 @@ AnimatorStateMachine:
     m_Position: {x: 310, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1284695424959249925}
-    m_Position: {x: 310, y: -130, z: 0}
+    m_Position: {x: 650, y: -260, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1167,7 +1167,7 @@ BlendTree:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blend Tree
+  m_Name: Hit Blend Tree
   m_Childs:
   - serializedVersion: 2
     m_Motion: {fileID: 3361746920086510881, guid: 618f2aa2afdaf95499bce41de59a1c2b,

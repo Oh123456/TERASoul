@@ -42,7 +42,7 @@ public class Enemy : Character
     void Update()
     {
         
-        Debug.DrawRay(ray.transform.position, -eWeapon.transform.right /*Vector3.Cross(ray.transform.position , eWeapon.transform.position )*/,  Color.green);
+        //Debug.DrawRay(ray.transform.position, -eWeapon.transform.right /*Vector3.Cross(ray.transform.position , eWeapon.transform.position )*/,  Color.green);
     }
 
 

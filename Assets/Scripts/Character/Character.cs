@@ -24,7 +24,7 @@ public class Character : BaseComponent
     [SerializeField]
     protected int Damage;
 
-    protected bool isDeath = false;
+    public bool isDeath = false;
     protected bool isBreaking = false;
 
     public int takeDamage { set; get; }

@@ -49,7 +49,7 @@ public class Weapon : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-
+       
         if (other.gameObject != owner & other != null)
         {
             Character character = other.gameObject.GetComponent<Character>();

@@ -2648,6 +2648,79 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 877945437}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &938638653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 364451539029221636, guid: 3bd33fdc854366643964162507fa4e9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 706963367673859076}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &938638654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938638653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b88ccc6b4de93a4686f0b702dd62aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1487948525}
+  owner: {fileID: 938638653}
+  attack3_dir: 8
+  isMove: 0
+  isattackRange: 0
+  originSpeed: 0
+  attackRange: 3
+  list:
+  - key: Kick
+    percent: 0
+    num: 0
+  - key: Attack1
+    percent: 0.35
+    num: 0
+  - key: Attack2
+    percent: 0.35
+    num: 0
+  - key: Attakc3
+    percent: 0.2
+    num: 0
+  - key: JumpAttack
+    percent: 0.4
+    num: 0
+  - key: Nothing
+    percent: 0.3
+    num: 0
+  - key: ComboAttack
+    percent: 0.3
+    num: 0
+--- !u!114 &938638655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938638653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21ea900898e8d548b29dd5e418f0376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackBoard: {fileID: 938638654}
+--- !u!65 &938638661
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938638653}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.08, y: 2, z: 0.4}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &947252595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4103,7 +4176,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 706963367673859076}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 938638653}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a2247c472cea8f4bb97a2c8acd95078, type: 3}
@@ -6084,7 +6157,7 @@ PrefabInstance:
       objectReference: {fileID: 841434695}
     - target: {fileID: 1327623842, guid: 3bd33fdc854366643964162507fa4e9a, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1327623842, guid: 3bd33fdc854366643964162507fa4e9a, type: 3}
       propertyPath: testcollider
@@ -6098,7 +6171,7 @@ PrefabInstance:
     - target: {fileID: 706963366506495865, guid: 3bd33fdc854366643964162507fa4e9a,
         type: 3}
       propertyPath: m_Radius
-      value: 0.44
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 706963366506495872, guid: 3bd33fdc854366643964162507fa4e9a,
         type: 3}

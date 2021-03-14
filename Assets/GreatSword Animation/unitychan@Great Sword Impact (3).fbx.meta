@@ -8,7 +8,7 @@ ModelImporter:
     second: Great Sword Impact (3)
   - first:
       74: 3361746920086510881
-    second: Great Sword Impact
+    second: Great Sword Impact_2
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -38,7 +38,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Great Sword Impact
+      name: Great Sword Impact_2
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
