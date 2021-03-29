@@ -61,8 +61,8 @@ public class FreeManAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            testcollider.enabled = !testcollider.enabled;
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //    testcollider.enabled = !testcollider.enabled;
         //AlwaysUpdate();
 
         //switch (aI_State)

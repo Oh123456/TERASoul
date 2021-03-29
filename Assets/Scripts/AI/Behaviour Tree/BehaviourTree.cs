@@ -16,14 +16,6 @@ namespace BehaviourTree
         Running,
     }
 
-    public enum Node_Kind
-    {
-        Root,
-        Decorator,
-        Sequence,
-        Action,
-    }
-
     public class BehaviourTree : MonoBehaviour
     {
         protected Root root;
@@ -93,18 +85,17 @@ namespace BehaviourTree
          * Condition 함수가 반환하는 값을가지고 참과 거짓중 다음 노드를 실행할지 말지 정하는 변수
          */
         protected bool isTrue = true;
-        Node_State INode.Tick(ref BlackBoard blackBoard, ref Stack<INode> parentStack)
+        public Node_State Tick(ref BlackBoard blackBoard, ref Stack<INode> parentStack)
         {
-            INode thisNode = this;
-
-            thisNode.OnStart();
+        
+            this.OnStart();
 
             if (Condition(ref blackBoard) == isTrue)
             {
-                thisNode.OnEnd();
+                this.OnEnd();
                 return nextNode.Tick(ref blackBoard, ref parentStack);
             }
-            thisNode.OnEnd();
+            this.OnEnd();
             return Node_State.Running;
         }
 
@@ -113,13 +104,11 @@ namespace BehaviourTree
             return true;
         }
 
-
-        void INode.OnStart()
+        public void OnStart()
         {
            
         }
-
-        void INode.OnEnd()
+        public void OnEnd()
         {
     
         }
@@ -137,20 +126,18 @@ namespace BehaviourTree
         public void AddNode(int priority, INode node)
         {
             nodes.Add(priority, node);
-
-            
         }
 
 
-        Node_State INode.Tick(ref BlackBoard blackBoard, ref Stack<INode> parentStack)
+        public Node_State Tick(ref BlackBoard blackBoard, ref Stack<INode> parentStack)
         {
-            INode thisNode = this;
-            thisNode.OnStart();
+            
+            this.OnStart();
 
             // 여러 노드들은 전부 득록한다.
             parentStack.Push(this);
-            //KeyValuePair<int,INode> desceningNodes = nodes.OrderByDescending(x => x.Key);
-            foreach (var item in nodes)
+            var desceningNodes = nodes.Reverse();
+            foreach (var item in desceningNodes)
             {
                 parentStack.Push(item.Value);
             }
@@ -162,13 +149,13 @@ namespace BehaviourTree
                 // 스텍에서 자기 자신이 나오면 빠져나온다.
                 if (node == this)
                 {
-                    thisNode.OnEnd();
+                    this.OnEnd();
                     return Node_State.Failure;
                 }
 
                 if (node.Tick(ref blackBoard, ref parentStack) == Node_State.Suceess)
                 {
-                    thisNode.OnEnd();
+                    this.OnEnd();
                     while (node != this)
                     {
                         node = parentStack.Pop();
@@ -180,11 +167,11 @@ namespace BehaviourTree
             }
         }
 
-        void INode.OnStart()
+        public void OnStart()
         {
 
         }
-        void INode.OnEnd()
+        public void OnEnd()
         {
 
         }
@@ -207,24 +194,20 @@ namespace BehaviourTree
         public void AddNode(int priority, INode node)
         {
             nodes.Add(priority, node);
-            // 키값으로 내림 차순으로 정렬
-            //nodes.OrderByDescending(x => x.Key);
         }
 
-        Node_State INode.Tick(ref BlackBoard blackBoard, ref Stack<INode> parentStack)
+        public Node_State Tick(ref BlackBoard blackBoard, ref Stack<INode> parentStack)
         {
-            INode thisNode = this;
-            thisNode.OnStart();
+            this.OnStart();
 
-            // 여러 노드들은 전부 득록한다.
             parentStack.Push(this);
 
-            //var desceningNodes = nodes.OrderByDescending(x => x.Key);
-            foreach (var item in nodes)
+            var desceningNodes = nodes.Reverse();
+            foreach (var item in desceningNodes)
             {
                 parentStack.Push(item.Value);
             }
-
+            
             INode node;
             while (true)
             {
@@ -232,23 +215,29 @@ namespace BehaviourTree
                 // 스텍에서 자기 자신이 나오면 빠져나온다.
                 if (node == this)
                 {
-                    thisNode.OnEnd();
+                    this.OnEnd();
                     return Node_State.Suceess;
                 }
 
                 if (node.Tick(ref blackBoard,ref parentStack) == Node_State.Failure)
                 {
-                    thisNode.OnEnd();
+                    this.OnEnd();
+                    while (node != this)
+                    {
+                        node = parentStack.Pop();
+                        if (node == this)
+                            break;
+                    }
                     return Node_State.Failure;
                 }
             }
         }
 
-        void INode.OnStart()
+        public void OnStart()
         {
 
         }
-        void INode.OnEnd()
+        public void OnEnd()
         {
 
         }
@@ -259,11 +248,11 @@ namespace BehaviourTree
      */
     public class Action : INode
     {
-        void INode.OnStart()
+        public void OnStart()
         {
 
         }
-        void INode.OnEnd()
+        public void OnEnd()
         {
 
         }
@@ -274,25 +263,14 @@ namespace BehaviourTree
             return Node_State.Failure;
         }
 
-        Node_State INode.Tick(ref BlackBoard blackBoard, ref Stack<INode> parentStack)
+        public Node_State Tick(ref BlackBoard blackBoard, ref Stack<INode> parentStack)
         {
            
             // 액션 실행부분 
-            INode node = (INode)(this);
-            node.OnStart();
-            Node_State ret;
-            while (true)
-            {
-                ret = this.BT_Update(ref blackBoard);
-                // 러닝상태면 반복
-                if (ret != Node_State.Running)
-                {
-                    // 액션 끝나는 부분
-                    node.OnEnd();
-                    return ret;
-                }
-            }
-            
+            this.OnStart();
+            Node_State ret = this.BT_Update(ref blackBoard);
+            this.OnEnd();
+            return ret;
         }
     }
 }

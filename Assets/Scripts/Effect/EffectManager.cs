@@ -23,9 +23,6 @@ public class EffectManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
-        // 신이 바뀌여도 파괴 안됨
-        DontDestroyOnLoad(this.gameObject);
     }
 
     // Start is called before the first frame update

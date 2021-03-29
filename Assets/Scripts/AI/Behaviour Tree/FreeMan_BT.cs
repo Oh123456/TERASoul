@@ -41,18 +41,18 @@ public class FreeMan_BT : BehaviourTree.BehaviourTree
     private void Awake()
     {
 
-        rootSelecotr.AddNode(2, moveAttackMove);
-        rootSelecotr.AddNode(1, attack_Decortaor);
         rootSelecotr.AddNode(0, dIe_Decortaor);
+        rootSelecotr.AddNode(1, attack_Decortaor);
+        rootSelecotr.AddNode(2, moveAttackMove);
 
-        moveAttackSelector.AddNode(1, attackSelector);
         moveAttackSelector.AddNode(0, moveAttack_Decorator);
+        moveAttackSelector.AddNode(1, attackSelector);
 
-        attackSelector.AddNode(1, move_Action);
         attackSelector.AddNode(0, attackRange_Decortaor);
+        attackSelector.AddNode(1, move_Action);
 
-        move_Sequence.AddNode(1, moveAttackSelector);
         move_Sequence.AddNode(0, look_Acotion);
+        move_Sequence.AddNode(1, moveAttackSelector);
 
         dIe_Decortaor.nextNode = die_Action;
 
@@ -249,7 +249,7 @@ namespace FreeMan_BehaviourTrees
 
     #region Action
 
-    public class MoveAttackMove_Action : Action
+    public class MoveAttackMove_Action : Action /*, INode*/
     {
         protected override Node_State BT_Update(ref BlackBoard blackBoard)
         {
@@ -260,6 +260,11 @@ namespace FreeMan_BehaviourTrees
                 return Node_State.Suceess;
             }
             return Node_State.Failure;
+        }
+
+        new public void OnStart()
+        {
+            Debug.Log("asdf ");
         }
     }
 
